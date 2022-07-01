@@ -66,20 +66,20 @@ public class Evento {
 
 	}
 
-	public int prenota() throws Exception {
-		if (numeroPrenotati < 0)
-			throw new Exception("Il numero di prenotazioni deve essere maggiore di 0");
-		if (numeroTotale() < 0)
+	public int prenota(int prenotazioni) throws Exception {
+		if (numeroPrenotati > numeroCapienza)
+			throw new Exception("Il numero di prenotazioni deve essere inferiore rispetto alla capienza");
+		if (numeroPrenotati < 0) {
+			throw new Exception("Numero non valido");
+		}
 
-			throw new Exception("Posti finiti");
-		else
-			return numeroPrenotati += 1;
+		return numeroPrenotati += prenotazioni;
 
 	}
 
-	public int disdici() throws Exception {
+	public int disdici(int disdetta) throws Exception {
 		if (today.isAfter(data) || numeroPrenotati <= 0) {
-			throw new Exception("Data superata o posti non validi");
+			throw new Exception("Data superata o i posti che vuoi disdire sono superiori ai posti prenotati! ");
 		}
 		return numeroPrenotati -= 1;
 	}
